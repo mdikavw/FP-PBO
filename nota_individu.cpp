@@ -1,6 +1,7 @@
 #include "nota_individu.h"
 #include <iostream>
 #include <fstream>
+#include <ctime>
 
 NotaIndividu::NotaIndividu(int x, int y):Nota(x, y){}
 
@@ -11,8 +12,17 @@ void NotaIndividu::generateJumlahPesanan(std::vector<Item> pesanan){
 }
 
 void NotaIndividu::printHeader(int x, int y){
+    time_t rawtime;
+    struct tm*timeinfo;
+    char buffer[80];
+
+    time(&rawtime);
+    timeinfo = localtime(&rawtime);
+
+    std::strftime(buffer, 80, "%d%m%Y", timeinfo);
+    std::string str(buffer);
     std::ofstream fileNota;
-        fileNota.open("nota_" + std::to_string(idPemesanan) + ".txt", std::fstream::app); 
+        fileNota.open("nota_" +str+"_"+ std::to_string(idPemesanan) + ".txt", std::fstream::app);
         fileNota << "----------Nota----------" << std::endl;
         std::cout << "----------Nota----------" << std::endl;
         fileNota << "Id Pemesanan: " << idPemesanan << std::endl;
@@ -27,8 +37,17 @@ void NotaIndividu::printHeader(int x, int y){
 }
 
 void NotaIndividu::printNota(std::vector<Item> pesanan){
+    time_t rawtime;
+    struct tm*timeinfo;
+    char buffer[80];
+
+    time(&rawtime);
+    timeinfo = localtime(&rawtime);
+
+    std::strftime(buffer, 80, "%d%m%Y", timeinfo);
+    std::string str(buffer);
     std::ofstream fileNota;
-        fileNota.open("nota_" + std::to_string(idPemesanan) + ".txt", std::fstream::app);
+        fileNota.open("nota_" +str+"_"+ std::to_string(idPemesanan) + ".txt", std::fstream::app);
         for(int i = 0; i < pesanan.size() - 1; i++){
             for(int j = i + 1; j < pesanan.size(); j++){
                 if(pesanan[i].idItem == pesanan[j].idItem){

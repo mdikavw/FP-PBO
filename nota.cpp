@@ -6,8 +6,17 @@
 Nota::Nota(int x, int y):idNota(x), idPemesanan(y){}
 
 void Nota::printNota(){
-    std::ofstream fileNota;
-        fileNota.open("nota_" + std::to_string(idPemesanan) + ".txt", std::fstream::app);
+    time_t rawtime;
+    struct tm*timeinfo;
+    char buffer[80];
+
+    time(&rawtime);
+    timeinfo = localtime(&rawtime);
+
+    std::strftime(buffer, 80, "%d%m%Y", timeinfo);
+    std::string str(buffer);
+    std::ofstream fileNota; 
+    fileNota.open("nota_" +str+"_"+ std::to_string(idPemesanan) + ".txt", std::fstream::app);
         for(int i = 0; i < daftarPesanan.size() - 1; i++){
             for(int j = i + 1; j < daftarPesanan.size(); j++){
                 if(daftarPesanan[i].idItem == daftarPesanan[j].idItem){
