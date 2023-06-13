@@ -1,0 +1,6 @@
+----------Nota----------
+Id Pemesanan: 183819
+Id Meja: 1
+Jumlah pelanggan: 1
+
+
